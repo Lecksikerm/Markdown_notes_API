@@ -1,0 +1,48 @@
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+markdown-notes          # Compiled binary (matches your module name)
+/server                 # If you build the binary as 'server'
+
+# Test binaries
+*.test
+
+# Output of go coverage tool
+*.out
+
+# Go workspace file
+go.work
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Dependencies (if you vendor, which you shouldn't)
+vendor/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Docker volumes (if stored locally)
+postgres_data/
+data/
