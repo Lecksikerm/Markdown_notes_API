@@ -6,6 +6,7 @@ import (
 	"markdown-notes/internal/handler"
 	"markdown-notes/internal/repository"
 	"markdown-notes/internal/service"
+	"markdown-notes/internal/websocket"
 	"markdown-notes/pkg/database"
 )
 
@@ -29,7 +30,10 @@ func New(db *database.Postgres) *gin.Engine {
 	noteService := service.NewNoteService(noteRepo)
 	noteHandler := handler.NewNoteHandler(noteService)
 
-	// Routes
+	// WebSocket hub
+	hub := websocket.NewHub()
+
+	// REST Routes
 	api := r.Group("/api/v1")
 	{
 		notes := api.Group("/notes")
@@ -41,6 +45,11 @@ func New(db *database.Postgres) *gin.Engine {
 			notes.DELETE("/:id", noteHandler.Delete)
 		}
 	}
+
+	// WebSocket route
+	r.GET("/ws", func(c *gin.Context) {
+		hub.HandleWebSocket(c.Writer, c.Request)
+	})
 
 	return r
 }
