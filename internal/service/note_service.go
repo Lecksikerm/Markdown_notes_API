@@ -50,7 +50,7 @@ func (s *NoteService) Update(ctx context.Context, id uuid.UUID, req model.Update
 	if req.Title != "" {
 		note.Title = req.Title
 	}
-	if req.Content != "" || req.Content == "" { // Allow empty content
+	if req.Content != "" || req.Content == "" { 
 		note.Content = req.Content
 	}
 	note.UpdatedAt = time.Now()
